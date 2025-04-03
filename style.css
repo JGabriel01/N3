@@ -1,0 +1,10 @@
+#div1{ 
+    display: flex;
+    border-style: solid;
+}
+#img{
+    height: 50px;
+    width: 50px;
+}
+
+
