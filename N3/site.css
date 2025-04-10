@@ -5,6 +5,7 @@
     background-color: #e64a19;
     border-radius: 5px;
     padding: 5px 5px 5px 5px;
+    text-decoration: none;
 }
 .hero{ 
     background-image: url(carro-imagem.jpg);
@@ -16,7 +17,7 @@
     padding-top: 175px;
     padding-bottom: 275px;
     background-attachment: fixed;
-    
+
 }
 .logo{
     display: block;
