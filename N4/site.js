@@ -13,20 +13,21 @@ formulario.id = 'Formulario';
 formulario.appendChild(texto);
 texto.type = 'text';
 texto.id = 'texto';
-texto.placeholder = 'Digite alguma tarefa aqui...'
+texto.placeholder = 'Digite alguma tarefa aqui...';
 
 formulario.appendChild(botao);
 botao.textContent = 'Enviar';
 botao.id = 'submit';
-botao.style.marginLeft = '10px'
+botao.style.marginLeft = '10px';
 
 document.body.appendChild(listaUl);
-listaUl.id = 'listaUl'
+listaUl.id = 'listaUl';
 
 let tasks = [];
+
 function carregarTarefa() {
-     tasks = JSON.parse(localStorage.getItem('tarefas') || '[]');
-     renderizarTarefa();
+    tasks = JSON.parse(localStorage.getItem('tarefas') || '[]');
+    renderizarTarefa();
 }
 
 function salvarTarefa() {
@@ -41,23 +42,38 @@ function renderizarTarefa() {
         novaLinha.textContent = tarefa;
 
         const remover = document.createElement('button');
-        remover.style.marginLeft = '10px';
         remover.textContent = 'Remover';
+        remover.style.marginLeft = '10px';
         remover.onclick = () => retirarTarefa(indice);
+        remover.id = "remover";
 
-        listaUl.appendChild(novaLinha);
+        const editar = document.createElement('button');
+        editar.textContent = 'Editar';
+        editar.style.marginLeft = '10px';
+        editar.className = 'btn-editar'; 
+        editar.onclick = () => {
+            const novaTarefa = prompt('Editar tarefa:', tarefa);
+            if (novaTarefa !== null && novaTarefa.trim() !== '') {
+                tasks[indice] = novaTarefa.trim();
+                salvarTarefa();
+                renderizarTarefa();
+            }
+        };
+
         novaLinha.appendChild(remover);
+        novaLinha.appendChild(editar);
+        listaUl.appendChild(novaLinha);
     });
 }
 
-function adicionarTarefa(tarefas) {
-    tasks.push(tarefas);
+function adicionarTarefa(tarefa) {
+    tasks.push(tarefa);
     renderizarTarefa();
     salvarTarefa();
 }
 
 function retirarTarefa(indice) {
-    tasks.splice(indice,1);
+    tasks.splice(indice, 1);
     renderizarTarefa();
     salvarTarefa();
 }
@@ -67,15 +83,16 @@ formulario.addEventListener('submit', (evento) => {
 
     const tarefaText = texto.value.trim();
 
-    if(tarefaText !== '') {
+    if (tarefaText !== '') {
         adicionarTarefa(tarefaText);
         texto.value = '';
-    } else {
-
     }
-})
+});
 
-document.addEventListener('DOMContentLoaded', carregarTarefa);
+document.addEventListener('DOMContentLoaded', () => {
+    carregarTarefa();
+    aplicarTema();
+});
 
 const Tema = document.createElement('button');
 formulario.appendChild(Tema);
@@ -83,22 +100,20 @@ Tema.textContent = 'Tema claro/escuro';
 Tema.style.marginLeft = '10px';
 Tema.id = 'tema';
 
-
 Tema.addEventListener('click', () => {
-    document.body.classList.toggle('tema-escuro')
+    document.body.classList.toggle('tema-escuro');
     if (document.body.classList.contains('tema-escuro')) {
-        localStorage.setItem('tema', 'escuro')
+        localStorage.setItem('tema', 'escuro');
     } else {
-        localStorage.setItem('tema', 'claro')
-    }});
+        localStorage.setItem('tema', 'claro');
+    }
+});
 
 function aplicarTema() {
     const temaSalvo = localStorage.getItem('tema');
     if (temaSalvo === 'escuro') {
         document.body.classList.add('tema-escuro');
     } else {
-        document.body.classList.remove('tema-escuro');  
+        document.body.classList.remove('tema-escuro');
     }
-};
-
-document.addEventListener('DOMContentLoaded', aplicarTema);
+}

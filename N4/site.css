@@ -82,21 +82,21 @@ button {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-body.tema-escuro button {
+body.tema-escuro #submit {
     background-color: #66BB6A;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
-button:hover {
+#submit:hover {
     background-color: #45a049;
     transform: translateY(-1px);
 }
 
-body.tema-escuro button:hover {
+body.tema-escuro #submit:hover {
     background-color: #81C784;
 }
 
-button:active {
+#submit:active {
     transform: translateY(0);
 }
 
@@ -113,7 +113,7 @@ button:active {
     padding: 12px 15px;
     border-radius: 8px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
@@ -125,13 +125,12 @@ body.tema-escuro #listaUl li {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
 }
 
-#listaUl li button {
-    margin-left: 15px;
+#listaUl li #remover {
     flex-shrink: 0;
     background-color: #e74c3c;
 }
 
-#listaUl li button:hover {
+#listaUl li #remover:hover {
     background-color: #c0392b;
 }
 
@@ -141,4 +140,13 @@ body.tema-escuro #listaUl li {
 
 #tema:hover {
     background-color: #2980b9;
+}
+.btn-editar {
+    flex-shrink: 0;
+    background-color: #f39c12;
+    color: white;
+}
+
+.btn-editar:hover {
+    background-color: #e67e22;
 }
